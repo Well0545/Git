@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Virtual</title>
+    <style>
+        /* Reset básico e estilo global */
+        body, h1, h2, h3, p, button, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Estilo do cabeçalho */
+        .header {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .header img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        /* Estilo do menu de navegação */
+        .nav {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav ul li {
+            position: relative;
+        }
+
+        .nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        .nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #007bff;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
+
+        .nav ul li:hover ul {
+            display: block;
+        }
+
+        .nav ul li ul li a {
+            padding: 10px;
+            font-weight: normal;
+        }
+
+        .nav ul li ul li a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos da seção Sobre a Loja */
+        .sobre-loja {
+            padding: 20px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .sobre-loja h2 {
+            margin-bottom: 20px;
+        }
+
+        .sobre-loja-conteudo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sobre-loja-texto,
+        .sobre-loja-imagem {
+            flex: 1 1 45%;
+        }
+
+        .sobre-loja-texto p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .sobre-loja-imagem img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Estilos da seção de Produtos */
+        .produtos {
+            padding: 20px 0;
+            background-color: #fff;
+        }
+
+        .produtos h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .produto-lista {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .produto-item {
+            flex: 1 1 calc(25% - 20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .produto-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .produto-item h3 {
+            margin: 10px 0;
+        }
+
+        .produto-item p {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .produto-item button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .produto-item button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos do slider de preços */
+        .slider-container {
+            position: relative;
+            max-height: 100px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item {
+            min-width: 100%;
+            text-align: center;
+            background-color: #f8f8f8;
+            padding: 10px;
+        }
+
+        .slider-item span {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slider-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .produto-item {
+                flex: 1 1 calc(33.33% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .produto-item {
+                flex: 1 1 calc(50% - 20px);
+            }
+
+            .sobre-loja-conteudo {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .sobre-loja-texto,
+            .sobre-loja-imagem {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .produto-item {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li>
+                    <a href="#categorias">Categorias</a>
+                    <ul>
+                        <li><a href="#eletronicos">Eletrônicos</a></li>
+                        <li><a href="#roupas">Roupas</a></li>
+                        <li><a href="#acessorios">Acessórios</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Cabeçalho com Logo -->
+    <header class="header">
+        <img src="/imagens/logo.jpg" alt="Logo da Loja">
+    </header>
+
+    <!-- Seção Sobre a Loja -->
+    <section class="sobre-loja" id="sobre">
+        <div class="container">
+            <h2>Sobre a Nossa Loja</h2>
+            <div class="sobre-loja-conteudo">
+                <div class="sobre-loja-texto">
+                    <p>Bem-vindo à Online Shop, onde qualidade e excelência se encontram. Fundada em 2020, nossa loja tem o compromisso de oferecer produtos selecionados com o máximo de cuidado e atenção. Desde o início, nosso objetivo tem sido proporcionar a melhor experiência de compra aos nossos clientes. Cada produto em nossa loja é escolhido para garantir satisfação e atender às mais altas expectativas. Explore nossas coleções e descubra por que somos a escolha preferida para suas necessidades!</p>
+                </div>
+                <div class="sobre-loja-imagem">
+                    <img src="/imagens/sobre a loja.webp" alt="Sobre a Loja">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Produtos -->
+    <section class="produtos" id="produtos">
+        <div class="container">
+            <h2>Nossos Produtos</h2>
+            <div class="produto-lista">
+                <div class="produto-item">
+                    <img src="/imagens/eletronico.jpg" alt="Produto 1">
+                    <h3>Produto 1</h3>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="slider-item">
+                                <span>R$199,99</span>
+                            </div>
+                            <div class="slider-item">
+                                <span>R$179,99</span>
+                            </div>
+                        </div>
+                        <div class="slider-controls">
+                            <button onclick="prevSlide()">&#10094;</button>
+                            <button onclick="nextSlide()">&#10095;</button>
+                        </div>
+                    </div>
+                    <p>Descrição breve do produto 1.</p>
+                    <button>Comprar</button>
+                </div>
+                <div class="produto-item">
+                    <img src="/imagens/utilidades.jfif" alt="Produto 2">
+                    <h3>Produto 2</h3>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="slider-item">
+                                <span>R$99,99</span>
+                            </div>
+                            <div class="slider-item">
+                                <span>R$89,99</span>
+                            </div>
+                        </div>
+                        <div class="slider-controls">
+                            <button onclick="prevSlide()">&#10094;</button>
+                            <button onclick="nextSlide()">&#10095;</button>
+                        </div>
+                    </div>
+                    <p>Descrição breve do produto 2.</p>
+                    <button>Comprar</button>
+                </div>
+                <div class="produto-item">
+                    <img src="/imagens/roupas.jpg" alt="Produto 3">
+                    <h3>Produto 3</h3>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="slider-item">
+                                <span>R$299,99</span>
+                            </div>
+                            <div class="slider-item">
+                                <span>R$259,99</span>
+                            </div>
+                        </div>
+                        <div class="slider-controls">
+                            <button onclick="prevSlide()">&#10094;</button>
+                            <button onclick="nextSlide()">&#10095;</button>
+                        </div>
+                    </div>
+                    <p>Descrição breve do produto 3.</p>
+                    <button>Comprar</button>
+                </div>
+                <div class="produto-item">
+                    <img src="/imagens/acessorios.jpg" alt="Produto 4">
+                    <h3>Produto 4</h3>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="slider-item">
+                                <span>R$149,99</span>
+                            </div>
+                            <div class="slider-item">
+                                <span>R$129,99</span>
+                            </div>
+                        </div>
+                        <div class="slider-controls">
+                            <button onclick="prevSlide()">&#10094;</button>
+                            <button onclick="nextSlide()">&#10095;</button>
+                        </div>
+                    </div>
+                    <p>Descrição breve do produto 4.</p>
+                    <button>Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript para controle do slider de preços
+        let slideIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slider-item');
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+            });
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        // Inicializar o slider
+        showSlide(slideIndex);
+    </script>
+</body>
+</html>
