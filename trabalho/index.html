@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .alert-custom {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Cadastro</h2>
+        <div id="feedback" class="alert-custom"></div>
+        <form id="cadastroForm">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+                <div class="invalid-feedback">Por favor, insira seu nome.</div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail">
+                <div class="invalid-feedback">Por favor, insira um e-mail válido.</div>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="form-control" id="telefone" placeholder="Digite seu telefone">
+                <div class="invalid-feedback">Por favor, insira um número de telefone válido.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita o envio do formulário
+
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var telefone = document.getElementById('telefone').value;
+            var feedback = document.getElementById('feedback');
+
+            var isValid = true;
+            feedback.classList.remove('alert-success', 'alert-danger');
+            feedback.style.display = 'none';
+
+            if (nome === '') {
+                document.getElementById('nome').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('nome').classList.remove('is-invalid');
+            }
+
+            if (email === '' || !validateEmail(email)) {
+                document.getElementById('email').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('email').classList.remove('is-invalid');
+            }
+
+            if (telefone === '') {
+                document.getElementById('telefone').classList.add('is-invalid');
+                isValid = false;
+            } else {
+                document.getElementById('telefone').classList.remove('is-invalid');
+            }
+
+            if (isValid) {
+                feedback.classList.add('alert-success');
+                feedback.textContent = 'Cadastro realizado com sucesso!';
+                feedback.style.display = 'block';
+                // Aqui você pode adicionar o código para enviar o formulário de fato
+            } else {
+                feedback.classList.add('alert-danger');
+                feedback.textContent = 'Por favor, preencha todos os campos corretamente.';
+                feedback.style.display = 'block';
+            }
+        });
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+</body>
+</html>
