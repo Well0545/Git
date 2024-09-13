@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeWorld</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://i0.wp.com/wallpapercave.com/wp/wp2443550.gif'); /* Substitua pelo caminho do seu GIF */
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .anime-image {
+            width: 150px; /* Ajuste o tamanho */
+            height: auto;
+            margin-left: 20px;
+        }
+
+        .banner {
+            height: 300px;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        #mensagemCadastro {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Estilos para os formulários */
+        form input, form textarea {
+            background-color: #ffffff;
+            color: #000000;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form input::placeholder, form textarea::placeholder {
+            color: #999999;
+        }
+
+        form label {
+            color: #ffffff;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        #contato {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho com Logo e Imagem de Anime -->
+    <header class="bg-dark text-white p-3 text-center">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <img src="imagens2/logo.jpg" alt="Logo do AnimeWorld" width="100">
+                    <!-- Nova imagem de anime -->
+                    <img src="imagens2/avatar.jpg" alt="Imagem de Anime" class="anime-image">
+                </div>
+                <nav>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="generosDropdown" role="button" data-bs-toggle="dropdown">Gêneros</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#acao">Ação</a></li>
+                                <li><a class="dropdown-item" href="#aventura">Aventura</a></li>
+                                <li><a class="dropdown-item" href="#comedia">Comédia</a></li>
+                                <li><a class="dropdown-item" href="#drama">Drama</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Principal com imagem de fundo -->
+    <section id="home" class="banner text-center text-white">
+        <h1>Bem-vindo ao AnimeWorld</h1>
+        <p>Seu portal para todos os gêneros de animes</p>
+    </section>
+
+    <!-- Carrossel -->
+    <section id="carrossel" class="container my-4">
+        <div id="animeCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="imagens2/kaguya-sama.jpg" class="d-block w-100" alt="Kaguya-sama">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagens2/konosuba.png" class="d-block w-100" alt="Konosuba">
+                </div>
+                <div class="carousel-item">
+                    <img src="imagens2/mirai nikki.jpg" class="d-block w-100" alt="Mirai Nikki">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#animeCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#animeCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Gêneros de Animes -->
+    <section id="generos" class="container my-4">
+        <h2 class="text-center mb-4">Gêneros de Animes</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Ação</h5>
+                        <p class="card-text">Animes cheios de adrenalina e lutas épicas!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Aventura</h5>
+                        <p class="card-text">Explore mundos incríveis e jornadas épicas!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Comédia</h5>
+                        <p class="card-text">Dê boas risadas com esses animes hilários.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Drama</h5>
+                        <p class="card-text">Histórias emocionantes que tocam o coração.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Cadastro -->
+    <section id="cadastro" class="container my-5">
+        <h2 class="text-center mb-4">Cadastre-se no AnimeWorld</h2>
+        <form id="cadastroForm" class="row g-3">
+            <div class="col-md-6">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="nome" required placeholder="Digite seu nome">
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" required placeholder="Digite seu email">
+            </div>
+            <div class="col-12">
+                <label for="senha" class="form-label">Senha:</label>
+                <input type="password" class="form-control" id="senha" required placeholder="Digite sua senha">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
+        <div id="mensagemCadastro" class="mt-3"></div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="container my-5">
+        <h2 class="text-center mb-4">Entre em Contato</h2>
+        <form>
+            <div class="mb-3">
+                <label for="nomeContato" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="nomeContato" required placeholder="Seu nome">
+            </div>
+            <div class="mb-3">
+                <label for="emailContato" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="emailContato" required placeholder="Seu email">
+            </div>
+            <div class="mb-3">
+                <label for="mensagem" class="form-label">Mensagem:</label>
+                <textarea class="form-control" id="mensagem" rows="3" required placeholder="Sua mensagem"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+        <!-- Redes sociais -->
+        <div class="text-center mt-4">
+            <a href="https://facebook.com" class="btn btn-outline-primary mx-2" target="_blank">Facebook</a>
+            <a href="https://twitter.com" class="btn btn-outline-info mx-2" target="_blank">Twitter</a>
+            <a href="https://instagram.com" class="btn btn-outline-danger mx-2" target="_blank">Instagram</a>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 AnimeWorld. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS e Script Personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cadastro
+        document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const mensagemCadastro = document.getElementById('mensagemCadastro');
+
+            // Validação simples
+            if (nome && email && senha.length >= 6) {
+                mensagemCadastro.innerHTML = `<div class="alert alert-success">Cadastro realizado com sucesso!</div>`;
+            } else {
+                mensagemCadastro.innerHTML = `<div class="alert alert-danger">Por favor, preencha todos os campos corretamente. A senha deve ter no mínimo 6 caracteres.</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
