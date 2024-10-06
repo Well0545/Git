@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Gastos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <!-- Página de Login -->
+    <div id="login-container" class="container">
+        <form id="login-form" class="text-center mt-5">
+            <h2>Login</h2>
+            <input type="email" id="email" class="form-control" placeholder="E-mail" required>
+            <input type="password" id="password" class="form-control mt-2" placeholder="Senha" required>
+            <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Dashboard (exibida após login) -->
+    <div id="dashboard" class="container" style="display:none;">
+        <h1 class="text-center my-4">Dashboard de Controle de Gastos</h1>
+        
+        <div class="row">
+            <!-- Saldo Atual -->
+            <div class="col-md-6">
+                <h2>Saldo Atual: <span id="balance-amount">R$ 0,00</span></h2>
+            </div>
+            <!-- Filtro de Período -->
+            <div class="col-md-6 text-right">
+                <label for="filter-period">Filtrar por:</label>
+                <select id="filter-period" class="form-control d-inline w-50">
+                    <option value="week">Última Semana</option>
+                    <option value="month">Último Mês</option>
+                    <option value="year">Último Ano</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Formulário para adicionar transações -->
+        <form id="transaction-form" class="mt-4">
+            <input type="text" id="description" class="form-control" placeholder="Descrição" required>
+            <input type="number" id="amount" class="form-control mt-2" placeholder="Valor" required>
+            <button type="submit" class="btn btn-success mt-3">Adicionar</button>
+        </form>
+
+        <!-- Botões de exportação -->
+        <div class="mt-3">
+            <button id="export-pdf" class="btn btn-warning">Exportar para PDF</button>
+            <button id="export-excel" class="btn btn-info">Exportar para Excel</button>
+        </div>
+
+        <!-- Gráfico de Despesas -->
+        <div class="charts mt-5">
+            <canvas id="expenseChart"></canvas>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

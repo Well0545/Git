@@ -1,0 +1,54 @@
+// Importando os módulos
+@use 'variables';
+@use 'layout';
+
+// Media Queries e outros ajustes globais
+$breakpoint-large: 1200px;
+$breakpoint-desktop: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+// Para telas grandes (> 1200px)
+@media screen and (min-width: $breakpoint-large) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+// Para desktops padrão (1024px a 1200px)
+@media screen and (max-width: $breakpoint-desktop) {
+  .container {
+    max-width: 90%;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Para tablets (768px a 1024px)
+@media screen and (max-width: $breakpoint-tablet) {
+  .container {
+    max-width: 80%;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+// Para smartphones (> 480px a 768px)
+@media screen and (max-width: $breakpoint-mobile) {
+  .container {
+    width: 100%;
+  }
+
+  .products {
+    display: block;
+  }
+
+  .product-item {
+    margin-bottom: 24px;
+  }
+}
