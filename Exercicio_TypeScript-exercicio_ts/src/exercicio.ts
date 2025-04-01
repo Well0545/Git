@@ -2,7 +2,7 @@ function Multiplicacao (valorA: number, valorB:number): number {
     const multiplicacao = valorA * valorB;
     return multiplicacao;
 }
-
+//
 let valorA = 400;
 let valorB = 2;
 
