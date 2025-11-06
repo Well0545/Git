@@ -153,3 +153,25 @@
 - [ ] Implementar direito ao esquecimento
 - [ ] Adicionar auditoria de acesso
 - [ ] Implementar backup automático
+
+
+## Melhorias de UI/UX
+
+### Navegação e Segurança
+- [x] Remover aba Admin da navegação pública
+- [x] Mostrar Admin apenas para usuários com role = "admin"
+- [x] Proteger rotas admin no frontend
+
+### Design Moderno
+- [x] Adicionar bordas arredondadas aos componentes
+- [x] Implementar sombras suaves e gradientes
+- [x] Adicionar animações de transição
+- [x] Melhorar espaçamento e layout
+- [x] Adicionar efeitos hover nos botões e cards
+
+### Interatividade
+- [x] Adicionar animações ao carregar página
+- [ ] Implementar loading skeletons
+- [x] Adicionar feedback visual em ações
+- [ ] Melhorar feedback de erro
+- [ ] Adicionar toasts para notificações
