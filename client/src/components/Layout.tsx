@@ -1,9 +1,10 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ShoppingCart, LogOut, LayoutGrid, Menu, X } from "lucide-react";
+import { ShoppingCart, LogOut, LayoutGrid, Menu, X, Moon, Sun } from "lucide-react";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { user, logout, isAuthenticated } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -20,26 +22,41 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200">
             {APP_LOGO && <img src={APP_LOGO} alt={APP_TITLE} className="h-8 w-8" />}
-            <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">{APP_TITLE}</span>
+            <span className="font-bold text-lg bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{APP_TITLE}</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
             <Link href="/products" className="text-sm font-medium hover:text-primary transition-colors duration-200 relative group">
               Catálogo
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-700 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
             {isAuthenticated && user?.role === "admin" && (
-              <Link href="/admin" className="text-sm font-medium hover:text-primary transition-colors duration-200 relative group flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100">
+              <Link href="/admin" className="text-sm font-medium hover:text-primary transition-colors duration-200 relative group flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 dark:bg-purple-950 dark:hover:bg-purple-900">
                 <LayoutGrid className="w-4 h-4" />
                 Admin
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-700 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 group-hover:w-full transition-all duration-300"></span>
               </Link>
             )}
           </nav>
 
           <div className="flex items-center gap-2 md:gap-4">
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200"
+              title={theme === "light" ? "Modo Escuro" : "Modo Claro"}
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5" />
+              ) : (
+                <Sun className="w-5 h-5" />
+              )}
+            </Button>
+
             <Link href="/cart" className="relative group">
-              <Button variant="ghost" size="icon" className="hover:bg-blue-50 transition-colors duration-200">
+              <Button variant="ghost" size="icon" className="hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200">
                 <ShoppingCart className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
               </Button>
             </Link>
@@ -47,7 +64,7 @@ export default function Layout({ children }: LayoutProps) {
             {isAuthenticated ? (
               <div className="hidden md:flex items-center gap-2">
                 <Link href="/orders">
-                  <Button variant="ghost" size="sm" className="hover:bg-blue-50 transition-colors duration-200">
+                  <Button variant="ghost" size="sm" className="hover:bg-purple-50 dark:hover:bg-purple-950 transition-colors duration-200">
                     Meus Pedidos
                   </Button>
                 </Link>
@@ -56,13 +73,13 @@ export default function Layout({ children }: LayoutProps) {
                   size="icon"
                   onClick={() => logout()}
                   title="Logout"
-                  className="hover:bg-red-50 transition-colors duration-200"
+                  className="hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200"
                 >
                   <LogOut className="w-5 h-5" />
                 </Button>
               </div>
             ) : (
-              <Button size="sm" onClick={() => (window.location.href = getLoginUrl())} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200">
+              <Button size="sm" onClick={() => (window.location.href = getLoginUrl())} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all duration-200 text-white">
                 Login
               </Button>
             )}
@@ -98,7 +115,7 @@ export default function Layout({ children }: LayoutProps) {
                       variant="ghost"
                       size="sm"
                       onClick={() => logout()}
-                      className="w-full justify-start hover:bg-red-50 transition-colors duration-200"
+                      className="w-full justify-start hover:bg-red-50 dark:hover:bg-red-950 transition-colors duration-200"
                     >
                       <LogOut className="w-4 h-4 mr-2" />
                       Logout
@@ -121,7 +138,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="space-y-3">
-              <h3 className="font-bold text-lg bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">{APP_TITLE}</h3>
+              <h3 className="font-bold text-lg bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{APP_TITLE}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Sua loja de eletrônicos de confiança.
               </p>

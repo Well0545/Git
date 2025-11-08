@@ -24,7 +24,7 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl mx-auto text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
               Bem-vindo à JB Eletronic E-commerce
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
@@ -32,7 +32,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/products">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 group">
                   <span>Começar a Comprar</span>
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -42,7 +42,7 @@ export default function Home() {
                   size="lg"
                   variant="outline"
                   onClick={() => (window.location.href = getLoginUrl())}
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300"
+                  className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 dark:hover:bg-purple-950 transition-all duration-300"
                 >
                   Fazer Login
                 </Button>
@@ -81,10 +81,10 @@ export default function Home() {
               return (
                 <div
                   key={index}
-                  className="group p-8 rounded-2xl bg-white/50 backdrop-blur-sm border border-white/20 hover:border-blue-400/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4"
+                  className="group p-8 rounded-2xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-white/20 dark:border-slate-700/50 hover:border-purple-400/50 dark:hover:border-pink-400/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
@@ -123,7 +123,7 @@ export default function Home() {
               {products.map((product, index) => (
                 <Link key={product.id} href={`/products/${product.slug}`}>
                   <div
-                    className="group h-full rounded-2xl overflow-hidden bg-white/50 backdrop-blur-sm border border-white/20 hover:border-blue-400/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer animate-in fade-in slide-in-from-bottom-4"
+                    className="group h-full rounded-2xl overflow-hidden bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border border-white/20 dark:border-slate-700/50 hover:border-purple-400/50 dark:hover:border-pink-400/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer animate-in fade-in slide-in-from-bottom-4"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {/* Product Image */}
@@ -155,7 +155,7 @@ export default function Home() {
 
                     {/* Product Info */}
                     <div className="p-4 space-y-3">
-                      <h3 className="font-bold text-lg group-hover:text-blue-600 transition-colors line-clamp-2">
+                      <h3 className="font-bold text-lg group-hover:text-purple-600 dark:group-hover:text-pink-500 transition-colors line-clamp-2">
                         {product.name}
                       </h3>
 
@@ -170,7 +170,7 @@ export default function Home() {
                               R$ {(product.originalPrice / 100).toFixed(2)}
                             </p>
                           )}
-                          <p className="text-xl font-bold text-blue-600">
+                          <p className="text-xl font-bold text-purple-600 dark:text-pink-500">
                             R$ {(product.price / 100).toFixed(2)}
                           </p>
                         </div>
@@ -198,14 +198,14 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
         <div className="container mx-auto px-4 text-center space-y-6 animate-in fade-in duration-700">
           <h2 className="text-3xl md:text-4xl font-bold">Pronto para começar?</h2>
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+          <p className="text-lg text-purple-100 max-w-2xl mx-auto">
             Navegue pelo nosso catálogo e encontre exatamente o que você procura.
           </p>
           <Link href="/products">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 shadow-lg hover:shadow-xl transition-all duration-300 group">
               <span>Explorar Catálogo</span>
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
