@@ -175,3 +175,16 @@
 - [x] Adicionar feedback visual em ações
 - [ ] Melhorar feedback de erro
 - [ ] Adicionar toasts para notificações
+
+
+## Melhorias do Carrinho e Pagamento
+
+- [x] Redesenhar carrinho com visualização profissional de itens
+- [x] Adicionar controles de quantidade (+ e -)
+- [x] Implementar remoção de itens com confirmação
+- [x] Cálculo de subtotal, frete e total em tempo real
+- [x] Integração inicial com Stripe (PIX e Cartão)
+- [x] Formulário de endereço no checkout
+- [x] Resumo visual do pedido
+- [x] Validações em tempo real
+- [x] Feedback visual de ações
