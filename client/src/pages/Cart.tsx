@@ -1,13 +1,15 @@
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
-import { Trash2, Plus, Minus, ShoppingCart, ArrowRight, AlertCircle } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingCart, ArrowRight, AlertCircle, Tag, X } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 
 export default function Cart() {
   const [, navigate] = useLocation();
   const [showRemoveConfirm, setShowRemoveConfirm] = useState<number | null>(null);
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
 
   const { data: cartItems, isLoading, refetch } = trpc.cart.list.useQuery();
 
@@ -31,6 +33,20 @@ export default function Cart() {
     },
   });
 
+  const { mutate: validateCoupon, isPending: isApplyingCoupon } = trpc.coupons.validate.useMutation({
+    onSuccess: (result) => {
+      setAppliedCoupon({
+        code: result.couponCode,
+        discount: result.discountAmount,
+      });
+      toast.success(result.message);
+      setCouponCode("");
+    },
+    onError: (error) => {
+      toast.error(error.message || "Cupom inválido");
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -43,8 +59,26 @@ export default function Cart() {
     (sum, item) => sum + (item.product?.price || 0) * item.quantity,
     0
   ) || 0;
-  const frete = subtotal > 0 ? 1500 : 0; // R$ 15 de frete
-  const total = subtotal + frete;
+  const frete = subtotal > 0 ? 1500 : 0;
+  const discount = appliedCoupon ? appliedCoupon.discount : 0;
+  const total = subtotal + frete - discount;
+
+  const handleApplyCoupon = () => {
+    if (!couponCode.trim()) {
+      toast.error("Digite um código de cupom");
+      return;
+    }
+
+    validateCoupon({
+      couponCode: couponCode.trim(),
+      subtotal: subtotal,
+    });
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    toast.info("Cupom removido");
+  };
 
   if (!cartItems || cartItems.length === 0) {
     return (
@@ -215,6 +249,54 @@ export default function Cart() {
                   ))}
                 </div>
 
+                {/* Coupon Section */}
+                <div className="space-y-3 pb-6 border-b border-border/50">
+                  <label className="block text-sm font-medium flex items-center gap-2">
+                    <Tag className="w-4 h-4" />
+                    Cupom de Desconto
+                  </label>
+
+                  {appliedCoupon ? (
+                    <div className="bg-green-50 dark:bg-green-950 rounded-lg p-3 flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-green-900 dark:text-green-100">
+                          Cupom aplicado: {appliedCoupon.code}
+                        </p>
+                        <p className="text-xs text-green-700 dark:text-green-300">
+                          Desconto: R$ {(appliedCoupon.discount / 100).toFixed(2)}
+                        </p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={removeCoupon}
+                        className="text-green-600 hover:bg-green-100 dark:hover:bg-green-900"
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                        onKeyPress={(e) => e.key === "Enter" && handleApplyCoupon()}
+                        placeholder="Digite o código"
+                        className="flex-1 px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-600 dark:bg-slate-800 dark:border-slate-700"
+                      />
+                      <Button
+                        size="sm"
+                        onClick={handleApplyCoupon}
+                        disabled={isApplyingCoupon || !couponCode.trim()}
+                        className="bg-purple-600 hover:bg-purple-700 text-white"
+                      >
+                        {isApplyingCoupon ? "..." : "Aplicar"}
+                      </Button>
+                    </div>
+                  )}
+                </div>
+
                 {/* Pricing Breakdown */}
                 <div className="space-y-3">
                   <div className="flex justify-between">
@@ -225,6 +307,12 @@ export default function Cart() {
                     <span className="text-muted-foreground">Frete</span>
                     <span className="font-medium">R$ {(frete / 100).toFixed(2)}</span>
                   </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-green-600 dark:text-green-400">
+                      <span className="text-muted-foreground">Desconto</span>
+                      <span className="font-medium">-R$ {(discount / 100).toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between pt-3 border-t border-border/50">
                     <span className="font-bold">Total</span>
                     <span className="text-2xl font-bold text-purple-600 dark:text-pink-500">

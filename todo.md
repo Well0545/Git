@@ -188,3 +188,11 @@
 - [x] Resumo visual do pedido
 - [x] Validações em tempo real
 - [x] Feedback visual de ações
+
+
+## Sistema de Cupons e Descontos
+
+- [x] Adicionar campo de cupom no carrinho
+- [x] Implementar validação de cupom
+- [x] Aplicar desconto automaticamente
+- [x] Exibir valor do desconto no resumo
